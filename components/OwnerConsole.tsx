@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { ThemePosterStudio } from "@/components/ThemePosterStudio";
 
-const STORAGE_KEY = "micah-owner-draft-v1";
+const STORAGE_KEY = "mica-owner-draft-v1";
 
 type EventDraft = {
   day: string;
@@ -128,10 +128,10 @@ export function OwnerConsole() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "micah-lounge-content.json";
+    link.download = "mica-lounge-content.json";
     link.click();
     URL.revokeObjectURL(url);
-    setNotice("micah-lounge-content.json created.");
+    setNotice("mica-lounge-content.json created.");
   }
 
   function resetDraft() {
@@ -147,10 +147,10 @@ export function OwnerConsole() {
 
       <header className="owner-top">
         <div>
-          <p className="owner-kicker">Micah Lounge / Owner Console</p>
+          <p className="owner-kicker">Mica Lounge / Owner Console</p>
           <h1>Prepare the live venue content.</h1>
           <p>
-            Enter only confirmed Micah Lounge information. This console saves a draft on this device, previews weekly campaigns and produces clean publication files.
+            Enter only confirmed Mica Lounge information. This console saves a draft on this device, previews weekly campaigns and produces clean publication files.
           </p>
         </div>
         <span className="status">{completion}/4 launch groups ready</span>
@@ -206,8 +206,8 @@ export function OwnerConsole() {
           </div>
 
           <h2>Publication payload</h2>
-          <p className="panel-intro">This structured information switches Micah from prototype to live venue mode after review.</p>
-          <textarea className="payload" readOnly value={JSON.stringify(payload, null, 2)} aria-label="Micah Lounge publication payload" />
+          <p className="panel-intro">This structured information switches Mica from prototype to live venue mode after review.</p>
+          <textarea className="payload" readOnly value={JSON.stringify(payload, null, 2)} aria-label="Mica Lounge publication payload" />
 
           <div className="owner-note"><strong>Important:</strong> this page does not publish changes directly. Owner drafts remain separate from the public site until reviewed.</div>
           <a className="back" href="/">← Back to public prototype</a>
