@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Micah Lounge",
+  name: "Mica Lounge",
   launchMode: "prototype" as const,
   location: {
     status: "pending" as const,
@@ -40,11 +40,11 @@ export type ThemeNight = {
   status: ThemeNightStatus;
 };
 
-// Publish real events here only after Micah Lounge confirms the details.
+// Publish real events here only after Mica Lounge confirms the details.
 export const confirmedThemeNights: ThemeNight[] = [];
 
 // Prototype concepts only. These show how the advertising board works and must
-// never be represented by the website or concierge as confirmed Micah Lounge events.
+// never be represented by the website or concierge as confirmed Mica Lounge events.
 export const conceptThemeNights: ThemeNight[] = [
   {
     id: "concept-wednesday",
@@ -79,7 +79,7 @@ export const conceptThemeNights: ThemeNight[] = [
   {
     id: "concept-saturday",
     day: "Saturday",
-    title: "Micah Signature",
+    title: "Mica Signature",
     kicker: "Concept slot",
     detail: "A flexible flagship Saturday concept for open-format music, guest moments and headline campaigns.",
     cta: "Ask about this concept",
@@ -94,9 +94,9 @@ export const publishedThemeNights =
 export const boardMessages =
   confirmedThemeNights.length > 0
     ? [
-        "THIS WEEK AT MICAH • LIVE PROGRAMME",
+        "THIS WEEK AT MICA • LIVE PROGRAMME",
         "MUSIC • TABLES • CELEBRATIONS • WEEKLY EVENTS",
-        "ASK MICAH CONCIERGE BEFORE YOU ARRIVE",
+        "ASK MICA CONCIERGE BEFORE YOU ARRIVE",
       ]
     : [
         "PROTOTYPE PROGRAMME • FOR OWNER APPROVAL",
