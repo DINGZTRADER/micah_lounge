@@ -6,7 +6,7 @@ import {
   siteConfig,
 } from "@/lib/site";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 const MAX_HISTORY = 8;
 const MAX_QUESTION = 300;
