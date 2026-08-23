@@ -8,6 +8,20 @@ Mobile-first nightlife prototype with a high-visibility theme-night advertising 
 
 The live prototype is running as the full Next.js application in the `micah-lounge` Vercel project. It demonstrates the visual direction, weekly advertising board and grounded concierge while clearly labelling sample theme nights as concepts rather than confirmed Micah Lounge events.
 
+## Owner content console
+
+**https://micah-lounge.vercel.app/owner**
+
+The owner console is deliberately `noindex, nofollow`. It lets the owner prepare:
+
+- exact address and Google Maps URL
+- WhatsApp / phone / email
+- opening hours
+- Instagram / Facebook / TikTok
+- confirmed weekly theme nights
+
+Drafts are stored only in the current browser using `localStorage`. The console can copy or download a structured `micah-lounge-content.json` payload for review and publication. It does not directly alter the public website.
+
 ## Local path
 
 The working folder is intended to be:
@@ -70,11 +84,20 @@ The API route includes:
 - explicit separation between confirmed events and prototype concepts
 - automatic fallback if the AI service is unavailable
 
+## Security baseline
+
+- Next.js 16.3.2
+- React 19.2.8
+- React DOM 19.2.8
+- Node.js runtime for the concierge API
+- current Vercel install reports zero npm vulnerabilities
+
 ## Deployment
 
 - GitHub repository: `DINGZTRADER/micah_lounge`
 - Branch: `main`
 - Vercel project: `micah-lounge`
 - Public URL: `https://micah-lounge.vercel.app`
+- Owner console: `https://micah-lounge.vercel.app/owner`
 
 The Vercel project is currently deployed directly from the validated source tree. GitHub remains the canonical source repository.
