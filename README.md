@@ -4,13 +4,13 @@ Mobile-first nightlife prototype with a high-visibility theme-night advertising 
 
 ## Live prototype
 
-**https://micah-lounge.vercel.app**
+**https://mica-lounge.vercel.app**
 
-The current Vercel project still uses the original technical slug `micah-lounge`, but the venue brand is **Mica Lounge**. The live prototype runs as the full Next.js application and demonstrates the visual direction, weekly advertising board and grounded concierge while clearly labelling sample theme nights as concepts rather than confirmed Mica Lounge events.
+The production Vercel project is now `mica-lounge`. The live prototype runs as the full Next.js application and demonstrates the visual direction, weekly advertising board and grounded concierge while clearly labelling sample theme nights as concepts rather than confirmed Mica Lounge events.
 
 ## Owner content console
 
-**https://micah-lounge.vercel.app/owner**
+**https://mica-lounge.vercel.app/owner**
 
 The owner console is deliberately `noindex, nofollow`. It lets the owner prepare:
 
@@ -30,7 +30,7 @@ The existing working folder is:
 D:\projects\micah\micah_lounge_project
 ```
 
-The folder and GitHub repository retain their original technical names for now; the public brand is **Mica Lounge**.
+The local folder and GitHub repository retain their original `micah` technical names for now; the public brand is **Mica Lounge**.
 
 ## Run locally
 
@@ -92,15 +92,15 @@ The API route includes:
 - React 19.2.8
 - React DOM 19.2.8
 - Node.js runtime for the concierge API
-- current Vercel install reports zero npm vulnerabilities
+- latest Mica production install reported zero npm vulnerabilities
 
 ## Deployment
 
 - Brand: `Mica Lounge`
 - GitHub repository: `DINGZTRADER/micah_lounge` (legacy technical slug)
 - Branch: `main`
-- Vercel project: `micah-lounge` (legacy technical slug)
-- Public URL: `https://micah-lounge.vercel.app`
-- Owner console: `https://micah-lounge.vercel.app/owner`
+- Vercel project: `mica-lounge`
+- Public URL: `https://mica-lounge.vercel.app`
+- Owner console: `https://mica-lounge.vercel.app/owner`
 
-GitHub remains the canonical source repository. The next infrastructure cleanup is to rename the technical slugs from `micah` to `mica` when the hosting/repository controls are available.
+The older `micah-lounge` Vercel project is legacy and has been superseded by `mica-lounge`. GitHub remains the canonical source repository.
