@@ -22,36 +22,82 @@ export default function HomePage() {
         <div className="hero-light light-one" />
         <div className="hero-light light-two" />
         <div className="hero-copy">
-          <p className="eyebrow">{siteConfig.city} • {siteConfig.country}</p>
+          <div className="hero-status-row">
+            <p className="eyebrow">{siteConfig.city} • {siteConfig.country}</p>
+            <span className="prototype-pill">Prototype</span>
+          </div>
           <h1>
             MICAH <span>LOUNGE</span>
           </h1>
           <p className="hero-tagline">{siteConfig.tagline}</p>
           <p className="hero-description">{siteConfig.description}</p>
           <div className="hero-actions">
-            <a className="primary-button" href="#theme-nights">See what’s on</a>
+            <a className="primary-button" href="#theme-nights">See the board</a>
             <a className="ghost-button" href="#concierge">Ask Micah</a>
           </div>
+          <div className="hero-proof" aria-label="Micah Lounge website features">
+            <span>Music</span>
+            <span>Tables</span>
+            <span>Celebrations</span>
+            <span>Weekly events</span>
+          </div>
         </div>
-        <div className="hero-poster" aria-label="Micah Lounge live poster">
-          <span className="poster-top">WEEKLY</span>
-          <strong>THEME<br />NIGHTS</strong>
-          <span className="poster-bottom">MUSIC • FOOD • DRINKS</span>
+
+        <div className="hero-poster" aria-label="Micah Lounge weekly poster concept">
+          <div className="poster-header">
+            <span className="poster-top">MICAH / KAMPALA</span>
+            <span className="poster-issue">WEEKLY 01</span>
+          </div>
+          <strong>YOUR<br />NIGHT.<br /><em>LIVE.</em></strong>
+          <div className="poster-bottom-wrap">
+            <span className="poster-bottom">MUSIC • TABLES • MOMENTS</span>
+            <span className="poster-line" />
+          </div>
         </div>
       </section>
+
+      <div className="pulse-strip" aria-hidden="true">
+        <span>MICAH AFTER DARK</span>
+        <span>●</span>
+        <span>WHAT&apos;S ON THIS WEEK?</span>
+        <span>●</span>
+        <span>ASK THE CONCIERGE</span>
+      </div>
 
       <ThemeBoard />
 
       <section className="experience" id="experience" aria-labelledby="experience-heading">
-        <div className="section-heading">
-          <p className="eyebrow">Built for the night</p>
-          <h2 id="experience-heading">One destination. Multiple reasons to return.</h2>
+        <div className="section-heading experience-heading">
+          <div>
+            <p className="eyebrow">The Micah experience</p>
+            <h2 id="experience-heading">Built around the decision to go out.</h2>
+          </div>
+          <p>
+            The website is designed to answer the questions that matter before a guest leaves home: what is happening, what kind of night it is, how to plan a table and how to get there.
+          </p>
         </div>
+
         <div className="feature-grid">
-          <article><span>01</span><h3>Music-led nights</h3><p>A site structure designed to put the current night, DJ or special programme first.</p></article>
-          <article><span>02</span><h3>Theme-night advertising</h3><p>The programme board is intentionally prominent so weekly campaigns become the homepage sales engine.</p></article>
-          <article><span>03</span><h3>Concierge conversion</h3><p>Guests can ask questions before they arrive instead of searching through social posts and old flyers.</p></article>
-          <article><span>04</span><h3>Mobile first</h3><p>Fast, touch-friendly presentation designed for customers arriving from WhatsApp, Instagram and TikTok.</p></article>
+          <article>
+            <span>01 / DISCOVER</span>
+            <h3>What&apos;s on tonight?</h3>
+            <p>The advertising board makes the current programme impossible to miss — especially for visitors arriving from social media.</p>
+          </article>
+          <article>
+            <span>02 / DECIDE</span>
+            <h3>Find your kind of night.</h3>
+            <p>Each campaign can carry its own music identity, offer, host, DJ, dress cue or special announcement.</p>
+          </article>
+          <article>
+            <span>03 / PLAN</span>
+            <h3>Ask. Book. Arrive.</h3>
+            <p>The concierge shortens the path from curiosity to a table enquiry instead of sending guests through old posts and flyers.</p>
+          </article>
+          <article>
+            <span>04 / RETURN</span>
+            <h3>A reason to come back weekly.</h3>
+            <p>Fresh theme-night promotion turns the website into an active sales surface rather than a static digital brochure.</p>
+          </article>
         </div>
       </section>
 
@@ -59,8 +105,9 @@ export default function HomePage() {
 
       <section className="closing-cta">
         <p className="eyebrow">Micah Lounge</p>
-        <h2>Make tonight easy to choose.</h2>
-        <a className="primary-button" href="#concierge">Ask the concierge</a>
+        <h2>Your night starts before you arrive.</h2>
+        <p>See the programme. Ask a question. Plan the table.</p>
+        <a className="primary-button" href="#concierge">Ask Micah Concierge</a>
       </section>
 
       <footer>

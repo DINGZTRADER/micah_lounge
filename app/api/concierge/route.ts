@@ -1,62 +1,114 @@
 import { NextRequest, NextResponse } from "next/server";
-import { siteConfig, themeNights } from "@/lib/site";
+
+import {
+  conceptThemeNights,
+  confirmedThemeNights,
+  siteConfig,
+} from "@/lib/site";
 
 export const runtime = "edge";
 
 const MAX_HISTORY = 8;
 const MAX_QUESTION = 300;
+const MAX_BODY_BYTES = 12_000;
 const TIMEOUT_MS = 8_000;
 
 type IncomingMessage = { role?: unknown; text?: unknown };
 
+type ResponsePayload = {
+  output_text?: string;
+  output?: Array<{ content?: Array<{ type?: string; text?: string }> }>;
+};
+
 function sanitizeHistory(value: unknown) {
   if (!Array.isArray(value)) return [];
+
   return value
     .slice(-MAX_HISTORY)
     .map((item: IncomingMessage) => ({
       role: item?.role === "assistant" ? "assistant" : "user",
-      text: typeof item?.text === "string" ? item.text.slice(0, 500) : "",
+      text: typeof item?.text === "string" ? item.text.trim().slice(0, 500) : "",
     }))
     .filter((item) => item.text.length > 0);
 }
 
 function deterministicFallback(question: string) {
   const q = question.toLowerCase();
-  if (q.includes("week") || q.includes("tonight") || q.includes("event") || q.includes("theme")) {
-    return themeNights.some((night) => night.active)
-      ? themeNights
-          .filter((night) => night.active)
-          .map((night) => `${night.day}: ${night.title} — ${night.detail}`)
-          .join("\n")
-      : "The confirmed weekly programme has not been published yet. I’ll only advertise a theme night once Micah Lounge has confirmed it.";
+
+  if (q.includes("week") || q.includes("tonight") || q.includes("event") || q.includes("theme") || q.includes("idea")) {
+    if (confirmedThemeNights.length > 0) {
+      return confirmedThemeNights
+        .map((night) => `${night.day}: ${night.title} — ${night.detail}`)
+        .join("\n");
+    }
+
+    return `Micah Lounge has not published a confirmed weekly programme in this prototype yet. The advertising board currently demonstrates concept ideas only: ${conceptThemeNights
+      .map((night) => `${night.day} — ${night.title}`)
+      .join(", ")}.`;
   }
+
   if (q.includes("table") || q.includes("book") || q.includes("reservation")) {
-    return "Send the date, preferred time and number of guests and I’ll help structure a table request. The direct booking channel will appear here once the venue contact is confirmed.";
+    return "Send the date, preferred arrival time and number of guests and I can structure a table request. The direct booking channel will activate once Micah Lounge's verified contact is added.";
   }
+
   if (q.includes("where") || q.includes("location") || q.includes("direction")) {
     return siteConfig.contact.address
       ? `${siteConfig.name} is at ${siteConfig.contact.address}.`
-      : "The verified venue address has not been published in the site content yet, so I won’t guess.";
+      : "Micah Lounge's verified address has not been published in the prototype yet, so I will not guess.";
   }
-  return `${siteConfig.name} is being presented as a nightlife destination for music, food, drinks, celebrations and recurring theme nights.`;
+
+  if (q.includes("help") || q.includes("what can")) {
+    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide directions once Micah Lounge's verified details are published.";
+  }
+
+  return `${siteConfig.name} is being presented as a Kampala lounge experience focused on music, tables, celebrations and recurring theme-night campaigns.`;
+}
+
+function extractAnswer(data: ResponsePayload): string {
+  if (typeof data.output_text === "string" && data.output_text.trim()) {
+    return data.output_text.trim();
+  }
+
+  return (data.output ?? [])
+    .flatMap((item) => item.content ?? [])
+    .filter((item) => item.type === "output_text" || typeof item.text === "string")
+    .map((item) => item.text ?? "")
+    .join(" ")
+    .trim();
 }
 
 export async function POST(request: NextRequest) {
+  const contentLength = Number(request.headers.get("content-length") ?? "0");
+  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+    return NextResponse.json({ error: "Request too large" }, { status: 413 });
+  }
+
   let body: { question?: unknown; history?: unknown };
+
   try {
     body = (await request.json()) as { question?: unknown; history?: unknown };
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const question = typeof body.question === "string" ? body.question.trim().slice(0, MAX_QUESTION) : "";
-  if (!question) return NextResponse.json({ error: "Question is required" }, { status: 400 });
+  const question =
+    typeof body.question === "string"
+      ? body.question.trim().slice(0, MAX_QUESTION)
+      : "";
+
+  if (!question) {
+    return NextResponse.json({ error: "Question is required" }, { status: 400 });
+  }
 
   const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) return NextResponse.json({ answer: deterministicFallback(question), mode: "grounded-fallback" });
+  if (!apiKey) {
+    return NextResponse.json(
+      { answer: deterministicFallback(question), mode: "grounded-fallback" },
+      { headers: { "Cache-Control": "no-store" } },
+    );
+  }
 
   const history = sanitizeHistory(body.history);
-  const confirmedNights = themeNights.filter((night) => night.active);
   const venueFacts = {
     name: siteConfig.name,
     city: siteConfig.city,
@@ -65,7 +117,10 @@ export async function POST(request: NextRequest) {
     address: siteConfig.contact.address || "NOT CONFIRMED",
     phone: siteConfig.contact.phone || "NOT CONFIRMED",
     whatsapp: siteConfig.contact.whatsapp || "NOT CONFIRMED",
-    themeNights: confirmedNights.length ? confirmedNights : "NO CONFIRMED THEME NIGHTS PUBLISHED",
+    confirmedThemeNights:
+      confirmedThemeNights.length > 0 ? confirmedThemeNights : "NONE PUBLISHED",
+    prototypeConcepts:
+      confirmedThemeNights.length === 0 ? conceptThemeNights : "NOT NEEDED",
   };
 
   const controller = new AbortController();
@@ -83,9 +138,9 @@ export async function POST(request: NextRequest) {
         max_output_tokens: 180,
         input: [
           {
-            role: "system",
+            role: "developer",
             content:
-              "You are Micah Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses or artists. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
+              "You are Micah Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses, DJs or artists. Prototype concepts are NOT confirmed events: if mentioning one, explicitly call it a prototype idea. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
           },
           {
             role: "user",
@@ -97,19 +152,24 @@ export async function POST(request: NextRequest) {
     });
 
     if (!upstream.ok) {
-      return NextResponse.json({ answer: deterministicFallback(question), mode: "grounded-fallback" });
+      return NextResponse.json(
+        { answer: deterministicFallback(question), mode: "grounded-fallback" },
+        { headers: { "Cache-Control": "no-store" } },
+      );
     }
 
-    const data = (await upstream.json()) as {
-      output_text?: string;
-      output?: Array<{ content?: Array<{ text?: string }> }>;
-    };
-    const answer =
-      data.output_text?.trim() || data.output?.flatMap((item) => item.content ?? []).map((item) => item.text ?? "").join(" ").trim();
+    const data = (await upstream.json()) as ResponsePayload;
+    const answer = extractAnswer(data) || deterministicFallback(question);
 
-    return NextResponse.json({ answer: answer || deterministicFallback(question), mode: "ai" });
+    return NextResponse.json(
+      { answer, mode: "ai" },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } catch {
-    return NextResponse.json({ answer: deterministicFallback(question), mode: "grounded-fallback" });
+    return NextResponse.json(
+      { answer: deterministicFallback(question), mode: "grounded-fallback" },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   } finally {
     clearTimeout(timeout);
   }
