@@ -1,4 +1,4 @@
-# Micah Lounge
+# Mica Lounge
 
 Mobile-first nightlife prototype with a high-visibility theme-night advertising board and a grounded intelligent concierge.
 
@@ -6,7 +6,7 @@ Mobile-first nightlife prototype with a high-visibility theme-night advertising 
 
 **https://micah-lounge.vercel.app**
 
-The live prototype is running as the full Next.js application in the `micah-lounge` Vercel project. It demonstrates the visual direction, weekly advertising board and grounded concierge while clearly labelling sample theme nights as concepts rather than confirmed Micah Lounge events.
+The current Vercel project still uses the original technical slug `micah-lounge`, but the venue brand is **Mica Lounge**. The live prototype runs as the full Next.js application and demonstrates the visual direction, weekly advertising board and grounded concierge while clearly labelling sample theme nights as concepts rather than confirmed Mica Lounge events.
 
 ## Owner content console
 
@@ -20,15 +20,17 @@ The owner console is deliberately `noindex, nofollow`. It lets the owner prepare
 - Instagram / Facebook / TikTok
 - confirmed weekly theme nights
 
-Drafts are stored only in the current browser using `localStorage`. The console can copy or download a structured `micah-lounge-content.json` payload for review and publication. It does not directly alter the public website.
+Drafts are stored only in the current browser using `localStorage`. The console can copy or download a structured `mica-lounge-content.json` payload for review and publication. It does not directly alter the public website.
 
 ## Local path
 
-The working folder is intended to be:
+The existing working folder is:
 
 ```text
 D:\projects\micah\micah_lounge_project
 ```
+
+The folder and GitHub repository retain their original technical names for now; the public brand is **Mica Lounge**.
 
 ## Run locally
 
@@ -58,7 +60,7 @@ The current public prototype deliberately uses **no assumed venue address, phone
 
 ## Prototype programme
 
-The current event cards are **concepts for owner approval**, not claims about Micah Lounge's real weekly programme. They are stored under `conceptThemeNights`.
+The current event cards are **concepts for owner approval**, not claims about Mica Lounge's real weekly programme. They are stored under `conceptThemeNights`.
 
 When the owner supplies the actual programme, add the confirmed events to `confirmedThemeNights`. The board automatically switches from the prototype concepts to the live programme.
 
@@ -80,7 +82,7 @@ The API route includes:
 - 180-token output cap
 - low reasoning effort for latency/cost control
 - no-store response headers
-- strict grounding against confirmed Micah Lounge facts
+- strict grounding against confirmed Mica Lounge facts
 - explicit separation between confirmed events and prototype concepts
 - automatic fallback if the AI service is unavailable
 
@@ -94,10 +96,11 @@ The API route includes:
 
 ## Deployment
 
-- GitHub repository: `DINGZTRADER/micah_lounge`
+- Brand: `Mica Lounge`
+- GitHub repository: `DINGZTRADER/micah_lounge` (legacy technical slug)
 - Branch: `main`
-- Vercel project: `micah-lounge`
+- Vercel project: `micah-lounge` (legacy technical slug)
 - Public URL: `https://micah-lounge.vercel.app`
 - Owner console: `https://micah-lounge.vercel.app/owner`
 
-The Vercel project is currently deployed directly from the validated source tree. GitHub remains the canonical source repository.
+GitHub remains the canonical source repository. The next infrastructure cleanup is to rename the technical slugs from `micah` to `mica` when the hosting/repository controls are available.
