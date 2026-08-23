@@ -105,7 +105,7 @@ export const boardMessages =
       ];
 
 export const venueContentStatus = {
-  locationConfirmed: siteConfig.location.status === "confirmed",
+  locationConfirmed: Boolean(siteConfig.location.address && siteConfig.location.mapUrl),
   contactConfirmed: Boolean(siteConfig.contact.whatsapp || siteConfig.contact.phone),
   hoursConfirmed: siteConfig.openingHours.length > 0,
   programmeConfirmed: confirmedThemeNights.length > 0,
