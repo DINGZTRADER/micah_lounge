@@ -42,36 +42,36 @@ function deterministicFallback(question: string) {
         .join("\n");
     }
 
-    return `Micah Lounge has not published a confirmed weekly programme in this prototype yet. The advertising board currently demonstrates concept ideas only: ${conceptThemeNights
+    return `Mica Lounge has not published a confirmed weekly programme in this prototype yet. The advertising board currently demonstrates concept ideas only: ${conceptThemeNights
       .map((night) => `${night.day} — ${night.title}`)
       .join(", ")}.`;
   }
 
   if (q.includes("table") || q.includes("book") || q.includes("reservation")) {
-    return "Send the date, preferred arrival time and number of guests and I can structure a table request. The direct booking channel will activate once Micah Lounge's verified contact is added.";
+    return "Send the date, preferred arrival time and number of guests and I can structure a table request. The direct booking channel will activate once Mica Lounge's verified contact is added.";
   }
 
   if (q.includes("hour") || q.includes("open") || q.includes("close")) {
     return siteConfig.openingHours.length > 0
       ? `Published opening hours: ${siteConfig.openingHours.join("; ")}.`
-      : "Micah Lounge's verified opening hours have not been published in the prototype yet, so I will not guess.";
+      : "Mica Lounge's verified opening hours have not been published in the prototype yet, so I will not guess.";
   }
 
   if (q.includes("phone") || q.includes("whatsapp") || q.includes("contact") || q.includes("number")) {
     if (siteConfig.contact.whatsapp || siteConfig.contact.phone) {
       return `Published contact details: ${siteConfig.contact.whatsapp || siteConfig.contact.phone}.`;
     }
-    return "Micah Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
+    return "Mica Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
   }
 
   if (q.includes("where") || q.includes("location") || q.includes("direction")) {
     return siteConfig.location.address
       ? `${siteConfig.name} is at ${siteConfig.location.address}.`
-      : "Micah Lounge's verified address has not been published in the prototype yet, so I will not guess.";
+      : "Mica Lounge's verified address has not been published in the prototype yet, so I will not guess.";
   }
 
   if (q.includes("help") || q.includes("what can")) {
-    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide opening hours, contacts and directions once Micah Lounge's verified details are published.";
+    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide opening hours, contacts and directions once Mica Lounge's verified details are published.";
   }
 
   return `${siteConfig.name} is being presented as a lounge experience focused on music, tables, celebrations and recurring theme-night campaigns.`;
@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
           {
             role: "developer",
             content:
-              "You are Micah Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses, DJs, artists or social handles. Prototype concepts are NOT confirmed events: if mentioning one, explicitly call it a prototype idea. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
+              "You are Mica Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses, DJs, artists or social handles. Prototype concepts are NOT confirmed events: if mentioning one, explicitly call it a prototype idea. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
           },
           {
             role: "user",
