@@ -1,3 +1,5 @@
+"use client";
+
 const MEDIA = {
   video: "https://videos.pexels.com/video-files/4781570/4781570-hd_1920_1080_25fps.mp4",
   lounge: "https://images.pexels.com/videos/4781570/club-drinks-dubai-girls-4781570.jpeg?auto=compress&dpr=1&h=750&w=1260",
