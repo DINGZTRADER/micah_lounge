@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Micah Lounge | Kampala Nightlife",
+  title: "Micah Lounge | Theme Nights & Concierge",
   description:
-    "Micah Lounge — a nightlife destination for music, food, drinks, celebrations and weekly theme nights.",
+    "Micah Lounge prototype with weekly theme-night promotion, table planning and a grounded intelligent concierge.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
