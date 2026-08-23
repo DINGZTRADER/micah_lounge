@@ -29,44 +29,44 @@ function fallbackAnswer(question: string): string {
   }
 
   if (q.includes("table") || q.includes("book") || q.includes("reservation")) {
-    return "I can prepare a table request. Tell me the date, preferred arrival time and number of guests. The direct booking button will activate as soon as Micah Lounge's verified WhatsApp or phone number is added.";
+    return "I can prepare a table request. Tell me the date, preferred arrival time and number of guests. The direct booking button will activate as soon as Mica Lounge's verified WhatsApp or phone number is added.";
   }
 
   if (q.includes("hour") || q.includes("open") || q.includes("close")) {
     return siteConfig.openingHours.length > 0
       ? `Published opening hours: ${siteConfig.openingHours.join("; ")}.`
-      : "Micah Lounge's verified opening hours have not been added yet, so I will not guess.";
+      : "Mica Lounge's verified opening hours have not been added yet, so I will not guess.";
   }
 
   if (q.includes("phone") || q.includes("whatsapp") || q.includes("contact") || q.includes("number")) {
     if (siteConfig.contact.whatsapp || siteConfig.contact.phone) {
       return `Published contact details: ${siteConfig.contact.whatsapp || siteConfig.contact.phone}.`;
     }
-    return "Micah Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
+    return "Mica Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
   }
 
   if (q.includes("where") || q.includes("location") || q.includes("direction")) {
     return siteConfig.location.address
       ? `${siteConfig.name} is at ${siteConfig.location.address}.`
-      : "Micah Lounge's verified map location has not been added yet, so I will not guess. Once confirmed, this will become one-tap directions.";
+      : "Mica Lounge's verified map location has not been added yet, so I will not guess. Once confirmed, this will become one-tap directions.";
   }
 
   if (q.includes("help") || q.includes("what can")) {
     return "I can explain the weekly programme, help organise a table request, answer venue questions and provide opening hours, contacts and directions once those details are verified and published.";
   }
 
-  if (q.includes("micah") || q.includes("about")) {
+  if (q.includes("mica") || q.includes("about")) {
     return `${siteConfig.name} is being presented as a mobile-first lounge experience centred on music, tables, celebrations and recurring theme-night campaigns.`;
   }
 
-  return "Ask me about theme nights, table planning, opening hours, contacts or directions. I only use Micah Lounge information that has been confirmed in the website data.";
+  return "Ask me about theme nights, table planning, opening hours, contacts or directions. I only use Mica Lounge information that has been confirmed in the website data.";
 }
 
 export function Concierge() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Welcome to Micah Lounge. I can help with the weekly programme, table planning and venue information — without making up details.",
+      text: "Welcome to Mica Lounge. I can help with the weekly programme, table planning and venue information — without making up details.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -109,7 +109,7 @@ export function Concierge() {
   return (
     <section className="concierge-shell" id="concierge" aria-labelledby="concierge-heading">
       <div className="concierge-copy">
-        <p className="eyebrow">Micah intelligent concierge</p>
+        <p className="eyebrow">Mica intelligent concierge</p>
         <h2 id="concierge-heading">Ask before you arrive.</h2>
         <p>
           One place for programme questions, table planning and venue information. The concierge is deliberately grounded so it does not invent prices, artists, offers, opening hours or contact details.
@@ -131,7 +131,7 @@ export function Concierge() {
       <div className="chat-card" aria-live="polite">
         <div className="chat-topline">
           <span className="status-dot" />
-          MICAH CONCIERGE
+          MICA CONCIERGE
           <span className="chat-mode">ONLINE</span>
         </div>
         <div className="messages">
@@ -140,14 +140,14 @@ export function Concierge() {
               {message.text}
             </div>
           ))}
-          {busy ? <div className="message assistant">Checking Micah Lounge information…</div> : null}
+          {busy ? <div className="message assistant">Checking Mica Lounge information…</div> : null}
         </div>
         <form onSubmit={submit} className="chat-form">
           <input
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="Ask Micah…"
-            aria-label="Ask Micah Concierge"
+            placeholder="Ask Mica…"
+            aria-label="Ask Mica Concierge"
             maxLength={300}
             autoComplete="off"
           />
