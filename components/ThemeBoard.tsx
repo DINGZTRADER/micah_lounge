@@ -19,7 +19,7 @@ export function ThemeBoard() {
         </span>
       </div>
 
-      <div className="marquee" aria-label="Micah Lounge announcements">
+      <div className="marquee" aria-label="Mica Lounge announcements">
         <div className="marquee-track">
           {[...boardMessages, ...boardMessages].map((message, index) => (
             <span key={`${message}-${index}`}>{message}</span>
@@ -47,7 +47,7 @@ export function ThemeBoard() {
 
       {isPrototypeProgramme ? (
         <div className="prototype-note">
-          <strong>These four nights are visual concepts, not published Micah Lounge events.</strong>
+          <strong>These four nights are visual concepts, not published Mica Lounge events.</strong>
           <span>
             They show the owner exactly how weekly promotions will appear. Once the real programme is supplied,
             only the event data changes — the advertising system stays intact.
