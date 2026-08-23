@@ -1,3 +1,4 @@
+import { Atmosphere } from "@/components/Atmosphere";
 import { Concierge } from "@/components/Concierge";
 import { ThemeBoard } from "@/components/ThemeBoard";
 import { siteConfig, venueContentStatus } from "@/lib/site";
@@ -14,6 +15,7 @@ export default function HomePage() {
         </a>
         <nav aria-label="Primary navigation">
           <a href="#theme-nights">Theme nights</a>
+          <a href="#atmosphere">The vibe</a>
           <a href="#experience">Experience</a>
           <a href="#concierge">Concierge</a>
         </nav>
@@ -35,7 +37,7 @@ export default function HomePage() {
           <p className="hero-description">{siteConfig.description}</p>
           <div className="hero-actions">
             <a className="primary-button" href="#theme-nights">See the board</a>
-            <a className="ghost-button" href="#concierge">Ask Mica</a>
+            <a className="ghost-button" href="#atmosphere">See the vibe</a>
           </div>
           <div className="hero-proof" aria-label="Mica Lounge website features">
             <span>Music</span>
@@ -67,6 +69,7 @@ export default function HomePage() {
       </div>
 
       <ThemeBoard />
+      <Atmosphere />
 
       <section className="experience" id="experience" aria-labelledby="experience-heading">
         <div className="section-heading experience-heading">
