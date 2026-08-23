@@ -75,7 +75,7 @@ export function ThemePosterStudio({ events }: Props) {
 
     ctx.fillStyle = "#f7f2f8";
     ctx.font = "900 54px Arial, sans-serif";
-    ctx.fillText("MICAH", 126, 154);
+    ctx.fillText("MICA", 126, 154);
     ctx.fillStyle = accent;
     ctx.font = "800 26px Arial, sans-serif";
     ctx.fillText("LOUNGE", 126, 194);
@@ -116,13 +116,13 @@ export function ThemePosterStudio({ events }: Props) {
     ctx.font = "800 28px Arial, sans-serif";
     ctx.fillText("YOUR NIGHT. LIVE.", 126, 1252);
     ctx.fillStyle = accent;
-    ctx.fillText("MICAH LOUNGE", 735, 1252);
+    ctx.fillText("MICA LOUNGE", 735, 1252);
 
     const link = document.createElement("a");
     const safeName = `${day}-${title}`
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "") || "micah-theme-night";
+      .replace(/^-|-$/g, "") || "mica-theme-night";
     link.download = `${safeName}-poster.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
@@ -153,12 +153,12 @@ export function ThemePosterStudio({ events }: Props) {
 
       <div className="poster-preview" style={{ "--poster-accent": accent } as React.CSSProperties}>
         <span className="poster-edge" />
-        <div className="poster-brand"><strong>MICAH</strong><span>LOUNGE</span></div>
+        <div className="poster-brand"><strong>MICA</strong><span>LOUNGE</span></div>
         <p className="poster-draft">OWNER DRAFT • SOCIAL POSTER</p>
         <p className="poster-day">{day}</p>
         <h3>{title}</h3>
         <p className="poster-detail">{detail}</p>
-        <div className="poster-footer"><strong>YOUR NIGHT. LIVE.</strong><span>MICAH LOUNGE</span></div>
+        <div className="poster-footer"><strong>YOUR NIGHT. LIVE.</strong><span>MICA LOUNGE</span></div>
       </div>
 
       <p className="poster-help">Edit the weekly event fields on the left; this preview updates immediately. The exported poster contains only the information entered in the owner draft.</p>
