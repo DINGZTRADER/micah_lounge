@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { ThemePosterStudio } from "@/components/ThemePosterStudio";
+
 const STORAGE_KEY = "micah-owner-draft-v1";
 
 type EventDraft = {
@@ -141,14 +143,14 @@ export function OwnerConsole() {
   return (
     <main className="owner-shell">
       <style jsx global>{`
-        :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#09080b;color:#f7f2f8;font-family:Inter,system-ui,sans-serif}.owner-shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:32px 0 80px}.owner-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12)}.owner-kicker{margin:0 0 8px;color:#ff4fd8;font-size:.72rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase}.owner-top h1{margin:0;font-size:clamp(2.4rem,7vw,5.8rem);letter-spacing:-.07em;line-height:.9}.owner-top p{max-width:650px;color:#b9afbd;line-height:1.6}.status{border:1px solid rgba(242,204,114,.3);background:rgba(242,204,114,.07);color:#f2cc72;border-radius:999px;padding:8px 12px;font-size:.72rem;font-weight:900;white-space:nowrap}.owner-grid{display:grid;grid-template-columns:1fr .78fr;gap:20px;margin-top:26px}.panel{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#121017;padding:22px}.panel h2{margin:0 0 6px;font-size:1.3rem}.panel-intro{margin:0 0 20px;color:#9f96a3;line-height:1.55}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#c9c1cc}.field input,.field textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#0d0b10;color:#fff;padding:12px 13px;outline:none}.field input:focus,.field textarea:focus{border-color:rgba(255,79,216,.65)}.field textarea{min-height:92px;resize:vertical}.events{display:grid;gap:10px}.event-row{display:grid;grid-template-columns:110px .9fr 1.4fr;gap:10px}.event-row input{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0d0b10;color:#fff;padding:11px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.actions button{border:1px solid rgba(255,255,255,.13);border-radius:999px;background:transparent;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.actions button.primary{border:0;background:linear-gradient(110deg,#ff4fd8,#8f68ff)}.actions button:hover{transform:translateY(-1px)}.checklist{display:grid;gap:10px;margin:18px 0}.check{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#b9afbd}.check strong{color:#fff}.payload{width:100%;min-height:360px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:#08070a;color:#c9c1cc;padding:14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.76rem;line-height:1.5;resize:vertical}.notice{margin:14px 0 0;color:#59f2a8;font-size:.86rem}.owner-note{margin-top:18px;border-left:3px solid #f2cc72;padding:14px 16px;background:rgba(242,204,114,.05);color:#c7beca;line-height:1.55}.owner-note strong{color:#f2cc72}.back{display:inline-block;margin-top:20px;color:#f2cc72;font-weight:800}@media(max-width:860px){.owner-grid{grid-template-columns:1fr}.owner-top{flex-direction:column}.event-row{grid-template-columns:1fr}.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}`}</style>
+        :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#09080b;color:#f7f2f8;font-family:Inter,system-ui,sans-serif}.owner-shell{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:32px 0 80px}.owner-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.12)}.owner-kicker{margin:0 0 8px;color:#ff4fd8;font-size:.72rem;font-weight:900;letter-spacing:.18em;text-transform:uppercase}.owner-top h1{margin:0;font-size:clamp(2.4rem,7vw,5.8rem);letter-spacing:-.07em;line-height:.9}.owner-top p{max-width:650px;color:#b9afbd;line-height:1.6}.status{border:1px solid rgba(242,204,114,.3);background:rgba(242,204,114,.07);color:#f2cc72;border-radius:999px;padding:8px 12px;font-size:.72rem;font-weight:900;white-space:nowrap}.owner-grid{display:grid;grid-template-columns:1fr .78fr;gap:20px;margin-top:26px}.panel{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#121017;padding:22px}.panel h2{margin:0 0 6px;font-size:1.3rem}.panel-intro{margin:0 0 20px;color:#9f96a3;line-height:1.55}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#c9c1cc}.field input,.field textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:#0d0b10;color:#fff;padding:12px 13px;outline:none}.field input:focus,.field textarea:focus{border-color:rgba(255,79,216,.65)}.field textarea{min-height:92px;resize:vertical}.events{display:grid;gap:10px}.event-row{display:grid;grid-template-columns:110px .9fr 1.4fr;gap:10px}.event-row input{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:10px;background:#0d0b10;color:#fff;padding:11px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}.actions button{border:1px solid rgba(255,255,255,.13);border-radius:999px;background:transparent;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.actions button.primary{border:0;background:linear-gradient(110deg,#ff4fd8,#8f68ff)}.actions button:hover{transform:translateY(-1px)}.checklist{display:grid;gap:10px;margin:18px 0 26px}.check{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#b9afbd}.check strong{color:#fff}.payload{width:100%;min-height:300px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:#08070a;color:#c9c1cc;padding:14px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.76rem;line-height:1.5;resize:vertical}.notice{margin:14px 0 0;color:#59f2a8;font-size:.86rem}.owner-note{margin-top:18px;border-left:3px solid #f2cc72;padding:14px 16px;background:rgba(242,204,114,.05);color:#c7beca;line-height:1.55}.owner-note strong{color:#f2cc72}.back{display:inline-block;margin-top:20px;color:#f2cc72;font-weight:800}@media(max-width:860px){.owner-grid{grid-template-columns:1fr}.owner-top{flex-direction:column}.event-row{grid-template-columns:1fr}.field-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}`}</style>
 
       <header className="owner-top">
         <div>
           <p className="owner-kicker">Micah Lounge / Owner Console</p>
           <h1>Prepare the live venue content.</h1>
           <p>
-            Enter only confirmed Micah Lounge information. This console saves a draft on this device and produces a clean content file for publication.
+            Enter only confirmed Micah Lounge information. This console saves a draft on this device, previews weekly campaigns and produces clean publication files.
           </p>
         </div>
         <span className="status">{completion}/4 launch groups ready</span>
@@ -171,7 +173,7 @@ export function OwnerConsole() {
           </div>
 
           <h2 style={{ marginTop: 28 }}>Weekly theme nights</h2>
-          <p className="panel-intro">Replace the concept board with confirmed weekly promotions.</p>
+          <p className="panel-intro">Replace the concept board with confirmed weekly promotions. The poster studio updates as you type.</p>
           <div className="events">
             {draft.events.map((event, index) => (
               <div className="event-row" key={index}>
@@ -192,6 +194,8 @@ export function OwnerConsole() {
         </section>
 
         <aside className="panel">
+          <ThemePosterStudio events={draft.events} />
+
           <h2>Launch checklist</h2>
           <p className="panel-intro">The public website should stay in prototype mode until these are confirmed.</p>
           <div className="checklist">
@@ -202,10 +206,10 @@ export function OwnerConsole() {
           </div>
 
           <h2>Publication payload</h2>
-          <p className="panel-intro">This is the exact structured information needed to switch Micah from prototype to live venue mode.</p>
+          <p className="panel-intro">This structured information switches Micah from prototype to live venue mode after review.</p>
           <textarea className="payload" readOnly value={JSON.stringify(payload, null, 2)} aria-label="Micah Lounge publication payload" />
 
-          <div className="owner-note"><strong>Important:</strong> this page does not publish changes directly. It intentionally keeps owner drafts separate from the public site until the details are reviewed.</div>
+          <div className="owner-note"><strong>Important:</strong> this page does not publish changes directly. Owner drafts remain separate from the public site until reviewed.</div>
           <a className="back" href="/">← Back to public prototype</a>
         </aside>
       </div>
