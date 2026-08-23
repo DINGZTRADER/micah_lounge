@@ -51,17 +51,30 @@ function deterministicFallback(question: string) {
     return "Send the date, preferred arrival time and number of guests and I can structure a table request. The direct booking channel will activate once Micah Lounge's verified contact is added.";
   }
 
+  if (q.includes("hour") || q.includes("open") || q.includes("close")) {
+    return siteConfig.openingHours.length > 0
+      ? `Published opening hours: ${siteConfig.openingHours.join("; ")}.`
+      : "Micah Lounge's verified opening hours have not been published in the prototype yet, so I will not guess.";
+  }
+
+  if (q.includes("phone") || q.includes("whatsapp") || q.includes("contact") || q.includes("number")) {
+    if (siteConfig.contact.whatsapp || siteConfig.contact.phone) {
+      return `Published contact details: ${siteConfig.contact.whatsapp || siteConfig.contact.phone}.`;
+    }
+    return "Micah Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
+  }
+
   if (q.includes("where") || q.includes("location") || q.includes("direction")) {
-    return siteConfig.contact.address
-      ? `${siteConfig.name} is at ${siteConfig.contact.address}.`
+    return siteConfig.location.address
+      ? `${siteConfig.name} is at ${siteConfig.location.address}.`
       : "Micah Lounge's verified address has not been published in the prototype yet, so I will not guess.";
   }
 
   if (q.includes("help") || q.includes("what can")) {
-    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide directions once Micah Lounge's verified details are published.";
+    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide opening hours, contacts and directions once Micah Lounge's verified details are published.";
   }
 
-  return `${siteConfig.name} is being presented as a Kampala lounge experience focused on music, tables, celebrations and recurring theme-night campaigns.`;
+  return `${siteConfig.name} is being presented as a lounge experience focused on music, tables, celebrations and recurring theme-night campaigns.`;
 }
 
 function extractAnswer(data: ResponsePayload): string {
@@ -111,12 +124,13 @@ export async function POST(request: NextRequest) {
   const history = sanitizeHistory(body.history);
   const venueFacts = {
     name: siteConfig.name,
-    city: siteConfig.city,
-    country: siteConfig.country,
     description: siteConfig.description,
-    address: siteConfig.contact.address || "NOT CONFIRMED",
+    locationStatus: siteConfig.location.status,
+    locationLabel: siteConfig.location.label,
+    address: siteConfig.location.address || "NOT CONFIRMED",
     phone: siteConfig.contact.phone || "NOT CONFIRMED",
     whatsapp: siteConfig.contact.whatsapp || "NOT CONFIRMED",
+    openingHours: siteConfig.openingHours.length > 0 ? siteConfig.openingHours : "NOT CONFIRMED",
     confirmedThemeNights:
       confirmedThemeNights.length > 0 ? confirmedThemeNights : "NONE PUBLISHED",
     prototypeConcepts:
@@ -136,11 +150,12 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: process.env.OPENAI_MODEL || "gpt-5.6-luna",
         max_output_tokens: 180,
+        reasoning: { effort: "low" },
         input: [
           {
             role: "developer",
             content:
-              "You are Micah Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses, DJs or artists. Prototype concepts are NOT confirmed events: if mentioning one, explicitly call it a prototype idea. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
+              "You are Micah Lounge Concierge. Be warm, concise and commercially useful. Use ONLY the supplied venue facts. Never invent event dates, offers, prices, opening hours, phone numbers, addresses, DJs, artists or social handles. Prototype concepts are NOT confirmed events: if mentioning one, explicitly call it a prototype idea. If a fact is not confirmed, say it is not yet published. Encourage a table enquiry when relevant. Keep answers under 90 words.",
           },
           {
             role: "user",

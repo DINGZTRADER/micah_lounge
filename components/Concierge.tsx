@@ -10,7 +10,7 @@ const QUICK_ASKS = [
   "What can you help me with?",
   "Show me the theme-night ideas",
   "I want a table",
-  "Where is Micah Lounge?",
+  "What are your opening hours?",
 ];
 
 function fallbackAnswer(question: string): string {
@@ -32,21 +32,34 @@ function fallbackAnswer(question: string): string {
     return "I can prepare a table request. Tell me the date, preferred arrival time and number of guests. The direct booking button will activate as soon as Micah Lounge's verified WhatsApp or phone number is added.";
   }
 
+  if (q.includes("hour") || q.includes("open") || q.includes("close")) {
+    return siteConfig.openingHours.length > 0
+      ? `Published opening hours: ${siteConfig.openingHours.join("; ")}.`
+      : "Micah Lounge's verified opening hours have not been added yet, so I will not guess.";
+  }
+
+  if (q.includes("phone") || q.includes("whatsapp") || q.includes("contact") || q.includes("number")) {
+    if (siteConfig.contact.whatsapp || siteConfig.contact.phone) {
+      return `Published contact details: ${siteConfig.contact.whatsapp || siteConfig.contact.phone}.`;
+    }
+    return "Micah Lounge's verified phone or WhatsApp number has not been published in the prototype yet.";
+  }
+
   if (q.includes("where") || q.includes("location") || q.includes("direction")) {
-    return siteConfig.contact.address
-      ? `${siteConfig.name} is at ${siteConfig.contact.address}.`
+    return siteConfig.location.address
+      ? `${siteConfig.name} is at ${siteConfig.location.address}.`
       : "Micah Lounge's verified map location has not been added yet, so I will not guess. Once confirmed, this will become one-tap directions.";
   }
 
   if (q.includes("help") || q.includes("what can")) {
-    return "I can explain the weekly programme, help organise a table request, answer venue questions and give directions once the verified venue details are published.";
+    return "I can explain the weekly programme, help organise a table request, answer venue questions and provide opening hours, contacts and directions once those details are verified and published.";
   }
 
   if (q.includes("micah") || q.includes("about")) {
-    return `${siteConfig.name} is being presented as a mobile-first Kampala lounge experience centred on music, tables, celebrations and recurring theme-night campaigns.`;
+    return `${siteConfig.name} is being presented as a mobile-first lounge experience centred on music, tables, celebrations and recurring theme-night campaigns.`;
   }
 
-  return "Ask me about theme nights, table planning, venue information or directions. I only use Micah Lounge information that has been confirmed in the website data.";
+  return "Ask me about theme nights, table planning, opening hours, contacts or directions. I only use Micah Lounge information that has been confirmed in the website data.";
 }
 
 export function Concierge() {
@@ -99,10 +112,10 @@ export function Concierge() {
         <p className="eyebrow">Micah intelligent concierge</p>
         <h2 id="concierge-heading">Ask before you arrive.</h2>
         <p>
-          One place for programme questions, table planning and venue information. The AI is deliberately grounded so it does not invent prices, artists, offers or contact details.
+          One place for programme questions, table planning and venue information. The concierge is deliberately grounded so it does not invent prices, artists, offers, opening hours or contact details.
         </p>
         <div className="concierge-trust-row" aria-label="Concierge safeguards">
-          <span>AI assisted</span>
+          <span>Concierge ready</span>
           <span>Fact grounded</span>
           <span>Mobile first</span>
         </div>

@@ -1,8 +1,10 @@
 import { Concierge } from "@/components/Concierge";
 import { ThemeBoard } from "@/components/ThemeBoard";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, venueContentStatus } from "@/lib/site";
 
 export default function HomePage() {
+  const verifiedVenueItems = Object.values(venueContentStatus).filter(Boolean).length;
+
   return (
     <main>
       <header className="nav-wrap">
@@ -23,7 +25,7 @@ export default function HomePage() {
         <div className="hero-light light-two" />
         <div className="hero-copy">
           <div className="hero-status-row">
-            <p className="eyebrow">{siteConfig.city} • {siteConfig.country}</p>
+            <p className="eyebrow">{siteConfig.location.label}</p>
             <span className="prototype-pill">Prototype</span>
           </div>
           <h1>
@@ -45,8 +47,8 @@ export default function HomePage() {
 
         <div className="hero-poster" aria-label="Micah Lounge weekly poster concept">
           <div className="poster-header">
-            <span className="poster-top">MICAH / KAMPALA</span>
-            <span className="poster-issue">WEEKLY 01</span>
+            <span className="poster-top">MICAH / WEEKLY</span>
+            <span className="poster-issue">PROTOTYPE 01</span>
           </div>
           <strong>YOUR<br />NIGHT.<br /><em>LIVE.</em></strong>
           <div className="poster-bottom-wrap">
@@ -99,6 +101,15 @@ export default function HomePage() {
             <p>Fresh theme-night promotion turns the website into an active sales surface rather than a static digital brochure.</p>
           </article>
         </div>
+
+        {verifiedVenueItems < 4 ? (
+          <div className="prototype-note">
+            <strong>Venue facts are still being verified.</strong>
+            <span>
+              Location, contacts, opening hours and the live weekly programme will appear only after Micah Lounge confirms them.
+            </span>
+          </div>
+        ) : null}
       </section>
 
       <Concierge />
@@ -112,7 +123,7 @@ export default function HomePage() {
 
       <footer>
         <div className="brand footer-brand"><span>MICAH</span><small>LOUNGE</small></div>
-        <p>{siteConfig.city}, {siteConfig.country}</p>
+        <p>{siteConfig.location.label}</p>
         <p>© {new Date().getFullYear()} Micah Lounge</p>
       </footer>
     </main>

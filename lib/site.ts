@@ -1,17 +1,29 @@
 export const siteConfig = {
   name: "Micah Lounge",
-  city: "Kampala",
-  country: "Uganda",
   launchMode: "prototype" as const,
-  tagline: "Kampala after dark, made easy.",
+  location: {
+    status: "pending" as const,
+    label: "Venue location to be confirmed",
+    city: "",
+    country: "",
+    address: "",
+    mapUrl: "",
+  },
+  tagline: "Your night, elevated.",
   description:
     "A bold, mobile-first lounge experience built around music, tables, celebrations and a weekly reason to come back.",
   contact: {
     whatsapp: "",
     phone: "",
-    address: "",
-    mapUrl: "",
+    email: "",
   },
+  openingHours: [] as string[],
+  social: {
+    instagram: "",
+    facebook: "",
+    tiktok: "",
+  },
+  verifiedAt: null as string | null,
 } as const;
 
 export type ThemeNightStatus = "confirmed" | "concept";
@@ -31,16 +43,15 @@ export type ThemeNight = {
 // Publish real events here only after Micah Lounge confirms the details.
 export const confirmedThemeNights: ThemeNight[] = [];
 
-// These are prototype concepts, not claims about Micah Lounge's current programme.
-// They are informed by current Kampala nightlife patterns and exist so the owner can
-// see the advertising board working before supplying the real weekly schedule.
+// Prototype concepts only. These show how the advertising board works and must
+// never be represented by the website or concierge as confirmed Micah Lounge events.
 export const conceptThemeNights: ThemeNight[] = [
   {
     id: "concept-wednesday",
     day: "Wednesday",
     title: "Ladies Night",
     kicker: "Concept slot",
-    detail: "A polished midweek social night with a strong visual campaign and rotating weekly offer.",
+    detail: "A polished midweek social night with a strong visual campaign and a rotating weekly offer.",
     cta: "Ask about this concept",
     accent: "rose",
     status: "concept",
@@ -50,7 +61,7 @@ export const conceptThemeNights: ThemeNight[] = [
     day: "Thursday",
     title: "R&B Rewind",
     kicker: "Concept slot",
-    detail: "90s, 2000s and new-school R&B designed as a distinctive midweek music identity.",
+    detail: "90s, 2000s and new-school R&B presented as a distinctive midweek music identity.",
     cta: "Ask about this concept",
     accent: "violet",
     status: "concept",
@@ -60,7 +71,7 @@ export const conceptThemeNights: ThemeNight[] = [
     day: "Friday",
     title: "Afrobeats × Amapiano",
     kicker: "Concept slot",
-    detail: "A high-energy Friday campaign built around the sounds currently driving Kampala lounge culture.",
+    detail: "A high-energy Friday campaign built around Afrobeats, Amapiano and strong visual promotion.",
     cta: "Ask about this concept",
     accent: "cyan",
     status: "concept",
@@ -70,7 +81,7 @@ export const conceptThemeNights: ThemeNight[] = [
     day: "Saturday",
     title: "Micah Signature",
     kicker: "Concept slot",
-    detail: "The flagship Saturday: open-format energy, guest moments and a flexible headline campaign.",
+    detail: "A flexible flagship Saturday concept for open-format music, guest moments and headline campaigns.",
     cta: "Ask about this concept",
     accent: "gold",
     status: "concept",
@@ -90,5 +101,12 @@ export const boardMessages =
     : [
         "PROTOTYPE PROGRAMME • FOR OWNER APPROVAL",
         "WEEKLY EVENT BOARD • BUILT TO CHANGE IN SECONDS",
-        "MICAH CONCIERGE • EVENTS • TABLES • VENUE INFO",
+        "VENUE DETAILS • PUBLISHED ONLY AFTER CONFIRMATION",
       ];
+
+export const venueContentStatus = {
+  locationConfirmed: siteConfig.location.status === "confirmed",
+  contactConfirmed: Boolean(siteConfig.contact.whatsapp || siteConfig.contact.phone),
+  hoursConfirmed: siteConfig.openingHours.length > 0,
+  programmeConfirmed: confirmedThemeNights.length > 0,
+} as const;
