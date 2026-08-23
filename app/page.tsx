@@ -8,8 +8,8 @@ export default function HomePage() {
   return (
     <main>
       <header className="nav-wrap">
-        <a className="brand" href="#top" aria-label="Micah Lounge home">
-          <span>MICAH</span>
+        <a className="brand" href="#top" aria-label="Mica Lounge home">
+          <span>MICA</span>
           <small>LOUNGE</small>
         </a>
         <nav aria-label="Primary navigation">
@@ -29,15 +29,15 @@ export default function HomePage() {
             <span className="prototype-pill">Prototype</span>
           </div>
           <h1>
-            MICAH <span>LOUNGE</span>
+            MICA <span>LOUNGE</span>
           </h1>
           <p className="hero-tagline">{siteConfig.tagline}</p>
           <p className="hero-description">{siteConfig.description}</p>
           <div className="hero-actions">
             <a className="primary-button" href="#theme-nights">See the board</a>
-            <a className="ghost-button" href="#concierge">Ask Micah</a>
+            <a className="ghost-button" href="#concierge">Ask Mica</a>
           </div>
-          <div className="hero-proof" aria-label="Micah Lounge website features">
+          <div className="hero-proof" aria-label="Mica Lounge website features">
             <span>Music</span>
             <span>Tables</span>
             <span>Celebrations</span>
@@ -45,9 +45,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="hero-poster" aria-label="Micah Lounge weekly poster concept">
+        <div className="hero-poster" aria-label="Mica Lounge weekly poster concept">
           <div className="poster-header">
-            <span className="poster-top">MICAH / WEEKLY</span>
+            <span className="poster-top">MICA / WEEKLY</span>
             <span className="poster-issue">PROTOTYPE 01</span>
           </div>
           <strong>YOUR<br />NIGHT.<br /><em>LIVE.</em></strong>
@@ -59,7 +59,7 @@ export default function HomePage() {
       </section>
 
       <div className="pulse-strip" aria-hidden="true">
-        <span>MICAH AFTER DARK</span>
+        <span>MICA AFTER DARK</span>
         <span>●</span>
         <span>WHAT&apos;S ON THIS WEEK?</span>
         <span>●</span>
@@ -71,7 +71,7 @@ export default function HomePage() {
       <section className="experience" id="experience" aria-labelledby="experience-heading">
         <div className="section-heading experience-heading">
           <div>
-            <p className="eyebrow">The Micah experience</p>
+            <p className="eyebrow">The Mica experience</p>
             <h2 id="experience-heading">Built around the decision to go out.</h2>
           </div>
           <p>
@@ -106,7 +106,7 @@ export default function HomePage() {
           <div className="prototype-note">
             <strong>Venue facts are still being verified.</strong>
             <span>
-              Location, contacts, opening hours and the live weekly programme will appear only after Micah Lounge confirms them.
+              Location, contacts, opening hours and the live weekly programme will appear only after Mica Lounge confirms them.
             </span>
           </div>
         ) : null}
@@ -115,16 +115,16 @@ export default function HomePage() {
       <Concierge />
 
       <section className="closing-cta">
-        <p className="eyebrow">Micah Lounge</p>
+        <p className="eyebrow">Mica Lounge</p>
         <h2>Your night starts before you arrive.</h2>
         <p>See the programme. Ask a question. Plan the table.</p>
-        <a className="primary-button" href="#concierge">Ask Micah Concierge</a>
+        <a className="primary-button" href="#concierge">Ask Mica Concierge</a>
       </section>
 
       <footer>
-        <div className="brand footer-brand"><span>MICAH</span><small>LOUNGE</small></div>
+        <div className="brand footer-brand"><span>MICA</span><small>LOUNGE</small></div>
         <p>{siteConfig.location.label}</p>
-        <p>© {new Date().getFullYear()} Micah Lounge</p>
+        <p>© {new Date().getFullYear()} Mica Lounge</p>
       </footer>
     </main>
   );
