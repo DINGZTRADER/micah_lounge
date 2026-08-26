@@ -88,7 +88,7 @@ The API route includes:
 
 ## Security baseline
 
-- Next.js 16.3.2
+- Next.js 16.3.3
 - React 19.2.8
 - React DOM 19.2.8
 - Node.js runtime for the concierge API
